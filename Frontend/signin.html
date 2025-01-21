@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup Page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
+
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.outerbox{
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to top left, #D9AFD9, #97D9E1);
+}
+.innerbox{
+    width: 400px;
+    margin: 0 auto;
+    position: relative;
+    top: 20%;
+    transform: translateY(10%);
+    padding: 10px 30px;
+    background: linear-gradient(to top left, #8ec5fcbb, #e0c3fc20);
+    border-radius: 15px;
+    box-shadow: #b94bb9 10px 10px 10px;
+    z-index: 2;
+    backdrop-filter: blur(10px);
+}
+.login{
+    width: 100%;
+}
+.login p{
+    margin: 10px 0px;
+}
+.login p label{
+    display: block;
+}
+.login input{
+    width: 100%;
+    padding: 7px;
+    margin: 5px 0px;
+    border: 1px solid rgb(195, 193, 193);
+    border-radius: 8px;
+    margin-top:7px ;
+}
+#login{
+    background-color: whitesmoke;
+    color: #b94bb9;
+    cursor: pointer;
+    width: 100%;
+    padding: 7px;
+    margin: 5px 0px;
+    border: 1px solid rgb(195, 193, 193);
+    border-radius: 8px;
+    margin-top:7px ;
+}
+#login:hover{
+    background: linear-gradient(to top left, #FFDEE9, #B5FFFC);
+    color:#b94bb9;
+}
+#signup{
+    background-color: whitesmoke;
+    color: #b94bb9;
+    cursor: pointer;
+    width: 100%;
+    padding: 7px;
+    margin: 5px 0px;
+    border: 1px solid rgb(195, 193, 193);
+    border-radius: 8px;
+    margin-top:7px ;
+}
+#signup:hover{
+    background: linear-gradient(to top left, #FFDEE9, #B5FFFC);
+    color:#b94bb9;
+}
+footer p{
+    text-align: center;
+}
+footer a{
+    color:#b94bb9;
+}
+.circle{
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    position: absolute;
+}
+.c1{
+    background: linear-gradient(to top left, #b94bb9,  #B5FFFC);
+    top: 100px;
+    left: 500px;
+}
+.c2{
+    background: linear-gradient(to top right, #B5FFFC, #b94bb9);
+    bottom: 100px;
+    right: 100px;
+}
+    </style>
+</head>
+<body>
+    <div class="outerbox">
+        <div class="innerbox">
+    
+    <main class="login">
+        <!-- Login Form -->
+        <form>
+            <p>
+                <label for="username">Username: </label>
+                <input type="text" id="username" name="username" required placeholder="Your Username" />
+            </p>
+            <p>
+                <label for="password">Password: </label>
+                <input type="password" id="password" name="password" required placeholder="Your Password" />
+            </p>
+            <p>
+                <button type="submit" id="login">Login</button>
+                <button id="signup" type="button">Don't have an account?
+                </button>
+            </p>
+        </form>
+    </main>
+    </div>
+    <div class="circle c1"></div>
+        <div class="circle c2"></div>
+    </div>
+        <script>
+    const loginForm = document.querySelector('.login form'); // Select login form (if any)
+
+    // Handle signup
+    
+
+    // Handle login
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            const response = await fetch('http://localhost:3000/auth/signin', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password }),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                localStorage.setItem('token', result.token);
+                alert(result.message);
+                window.location.href = '/Frontend/index.html';
+            } else {
+                alert(result.error || 'Login failed');
+            }
+            
+
+        } catch (err) {
+            console.error('Error:', err);
+            alert('An error occurred during login');
+        }
+
+        
+    });
+    signup.addEventListener('click',() => {
+            window.location.href = '/Frontend/signup.html';
+        });
+</script>
+</body>
+</html>
+
+
