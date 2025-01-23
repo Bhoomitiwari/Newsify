@@ -1,13 +1,5 @@
 const mongoose = require('mongoose');
 
-// Connect to MongoDB
-// Uncomment if you want to connect to MongoDB (adjust connection string if needed)
-// const connectDB = async () => {
-//     await mongoose.connect(
-//         'mongodb+srv://vivpasingh:ielBXbmVKP18id56@cluster0.xew7a.mongodb.net/Newsify',
-//         { useNewUrlParser: true, useUnifiedTopology: true }
-//     );
-// };
 
 // User Schema
 const userSchema = new mongoose.Schema({
